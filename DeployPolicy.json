@@ -1,0 +1,46 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "VisualEditor0",
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:ListStacks",
+        "cloudformation:UpdateStackSet",
+        "cloudformation:CreateChangeSet",
+        "cloudformation:DeleteStackSet",
+        "cloudformation:DeleteChangeSet",
+        "cloudformation:ListGeneratedTemplates",
+        "cloudformation:DescribeStacks",
+        "cloudformation:GetGeneratedTemplate",
+        "cloudformation:GetTemplateSummary",
+        "cloudformation:DescribeStackSet",
+        "cloudformation:DescribeGeneratedTemplate",
+        "cloudformation:StopStackSetOperation",
+        "cloudformation:DescribeChangeSet",
+        "cloudformation:ExecuteChangeSet",
+        "cloudformation:CreateStackSet",
+        "cloudformation:ValidateTemplate"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "VisualEditor1",
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetRole",
+        "s3:PutObject",
+        "iam:PassRole",
+        "iam:DetachRolePolicy",
+        "iam:DeleteRolePolicy",
+        "iam:CreateRole",
+        "iam:DeleteRole",
+        "iam:AttachRolePolicy",
+        "iam:PutRolePolicy",
+        "iam:GetRolePolicy",
+        "s3:PutObjectAcl"
+      ],
+      "Resource": ["arn:aws:iam::<account_id>:role/*", "arn:aws:s3:::*/*"]
+    }
+  ]
+}
