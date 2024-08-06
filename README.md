@@ -1,6 +1,6 @@
 ## Overview
 
-MetaPhoto is an application to list photo libraries for each user, through an API that enrichs the photo, user and album data got from an internal API
+MetaPhoto is an application to list photo libraries for each user, through an API that enrichs the photo, user and album data got from an internal API. See the [Wiki](https://github.com/nxsaloj/MetaPhoto/wiki) for more information.
 
 ## First steps
 
