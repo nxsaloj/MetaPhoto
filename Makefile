@@ -30,5 +30,8 @@ dev_backend:
 deploy: role_setup deploy_backend setup_spa	
 	@echo "Deploy process finished"
 
+rebuild:
+	docker exec -it sam-container bash -c "sam build --parameter-overrides BucketBuild=/home/app"
+
 sync:
 	docker exec -it sam-container bash -c "sam sync --parameter-overrides Stage=prod BucketBuild=metaphotobucketbuild --profile ${AWS_CLI_PROFILE} --role-arn arn:aws:iam::${AWS_ACCOUNT_ID}:role/cloudformation-service-role --stack-name BackendStack --watch --region us-east-1"
