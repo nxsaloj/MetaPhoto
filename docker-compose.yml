@@ -1,0 +1,43 @@
+services:
+  bash:
+    container_name: bash-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    tty: true
+    working_dir: /app
+    entrypoint: ["bash"]
+
+  meta_photo_sam:
+    container_name: sam-container
+    build:
+      context: ./MetaPhoto.backend
+      dockerfile: Dockerfile
+    command: ["$PWD/MetaPhoto.backend"]
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./MetaPhoto.backend/:/home/app/
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/app/node_modules/
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    tty: true
+    depends_on:
+      - bash
+
+  spa:
+    container_name: metaphoto-spa
+    build:
+      context: ./MetaPhoto.spa
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./MetaPhoto.spa/:/home/app/
+      - /home/app/node_modules/
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    tty: true
