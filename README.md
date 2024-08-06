@@ -24,6 +24,7 @@ git clone --recurse-submodules https://github.com/nxsaloj/MetaPhoto
 
 1. Run the command `docker compose up` at the root of the project
 2. The backend is already running at: "http://localhost:3000/"
+   > The endpoints are under /api/v1/photos
 3. To rebuild any change in the code use the command `make rebuild` to reflect changes
    > You don't need to run `docker compose up` every time you change the `template.yml` file
 4. The frontend is already running at: "http://localhost:8080/"
