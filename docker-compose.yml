@@ -29,7 +29,7 @@ services:
       - bash
 
   spa:
-    container_name: metaphoto-spa
+    container_name: spa-container
     build:
       context: ./MetaPhoto.spa
       dockerfile: Dockerfile
