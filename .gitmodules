@@ -1,0 +1,6 @@
+[submodule "MetaPhoto.spa"]
+	path = MetaPhoto.spa
+	url = https://github.com/nxsaloj/MetaPhoto.spa
+[submodule "MetaPhoto.backend"]
+	path = MetaPhoto.backend
+	url = https://github.com/nxsaloj/MetaPhoto.backend
