@@ -3,6 +3,24 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   MetaPhoto project
 
+Parameters:
+  UserId:
+    Description: UserId of the AWS account
+    Default: ""
+    Type: String
+    ConstraintDescription: Must specify the UserId
+  UserName:
+    Description: UserName of the user to use for the build
+    Default: ""
+    Type: String
+    ConstraintDescription: Must specify the UserName
+
+Conditions:
+  AssociateUser: !Not
+    - !Equals
+      - !Ref UserId
+      - ""
+
 Resources:
   AppDevServiceRole:
     Type: AWS::IAM::Role
@@ -14,9 +32,31 @@ Resources:
           - Effect: Allow
             Principal:
               Service: cloudformation.amazonaws.com
-            Action: sts:AssumeRole
+              AWS: !If
+                - AssociateUser
+                - !Sub "arn:aws:iam::${UserId}:user/${UserName}"
+                - ""
+            Action:
+              - sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
         - arn:aws:iam::aws:policy/CloudFrontFullAccess
         - arn:aws:iam::aws:policy/AWSLambda_FullAccess
         - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
+        - arn:aws:iam::aws:policy/IAMFullAccess
+        - arn:aws:iam::aws:policy/AmazonAPIGatewayAdministrator
+  AppPassRole:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: appDevPassRole
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - iam:PassRole
+              - iam:Get*
+              - iam:List*
+            Resource: "*"
+      Roles:
+        - !Ref AppDevServiceRole
