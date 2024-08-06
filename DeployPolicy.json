@@ -5,42 +5,34 @@
       "Sid": "VisualEditor0",
       "Effect": "Allow",
       "Action": [
-        "cloudformation:ListStacks",
-        "cloudformation:UpdateStackSet",
-        "cloudformation:CreateChangeSet",
-        "cloudformation:DeleteStackSet",
-        "cloudformation:DeleteChangeSet",
-        "cloudformation:ListGeneratedTemplates",
-        "cloudformation:DescribeStacks",
-        "cloudformation:GetGeneratedTemplate",
-        "cloudformation:GetTemplateSummary",
-        "cloudformation:DescribeStackSet",
-        "cloudformation:DescribeGeneratedTemplate",
-        "cloudformation:StopStackSetOperation",
-        "cloudformation:DescribeChangeSet",
-        "cloudformation:ExecuteChangeSet",
-        "cloudformation:CreateStackSet",
-        "cloudformation:ValidateTemplate"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "VisualEditor1",
-      "Effect": "Allow",
-      "Action": [
         "iam:GetRole",
-        "s3:PutObject",
-        "iam:PassRole",
-        "iam:DetachRolePolicy",
-        "iam:DeleteRolePolicy",
         "iam:CreateRole",
         "iam:DeleteRole",
         "iam:AttachRolePolicy",
         "iam:PutRolePolicy",
+        "s3:PutObject",
+        "s3:GetObject",
+        "iam:PassRole",
+        "iam:DetachRolePolicy",
+        "iam:GetUser",
+        "s3:DeleteObject",
         "iam:GetRolePolicy",
         "s3:PutObjectAcl"
       ],
-      "Resource": ["arn:aws:iam::<account_id>:role/*", "arn:aws:s3:::*/*"]
+      "Resource": [
+        "arn:aws:iam::<account_id>:user/*",
+        "arn:aws:iam::<account_id>:role/cloudformation-service-role",
+        "arn:aws:s3:::*/*"
+      ]
+    },
+    {
+      "Sid": "VisualEditor1",
+      "Effect": "Allow",
+      "Action": ["sts:AssumeRole", "s3:CreateBucket", "s3:ListBucket"],
+      "Resource": [
+        "arn:aws:s3:::*",
+        "arn:aws:iam::<account_id>:role/cloudformation-service-role"
+      ]
     }
   ]
 }
